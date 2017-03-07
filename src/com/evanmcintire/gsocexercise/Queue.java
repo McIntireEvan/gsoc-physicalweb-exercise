@@ -14,7 +14,7 @@ public class Queue<T> {
      *
      * @param data The data to put into the Queue
      */
-    private void put(T data) {
+    public void put(T data) {
         //Create a new generic array with a new space at the end
         T[] newArray = (T[])(new Object[this.contents.length + 1]);
 
