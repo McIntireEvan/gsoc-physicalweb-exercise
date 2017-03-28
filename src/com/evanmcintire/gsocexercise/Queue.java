@@ -4,7 +4,7 @@ public class Queue<T> {
     T[] contents;
 
     public Queue() {
-        contents = (T[])(new Object[1]);
+        contents = (T[])(new Object[0]);
     }
 
     /**
@@ -15,6 +15,12 @@ public class Queue<T> {
      * @param data The data to put into the Queue
      */
     public void put(T data) {
+        if(this.contents.length == 0) {
+            T[] newArray = (T[])(new Object[1]);
+            this.contents = newArray;
+            this.contents[0] = data;
+            return;
+        }
         //Create a new generic array with a new space at the end
         T[] newArray = (T[])(new Object[this.contents.length + 1]);
 
@@ -40,16 +46,20 @@ public class Queue<T> {
         //We can't get an element, so throw an error
         if(this.contents.length == 0) {
             throw new IndexOutOfBoundsException();
+        } else if(this.contents.length == 1) {
+            returnData = this.contents[0];
+            this.contents = (T[])(new Object[0]);
+            return returnData;
         }
 
         //Create a new array 1 smaller than our current array
         T[] newArray = (T[])(new Object[this.contents.length - 1]);
 
         //Copy over everything but the first element
-        for(int i = 0; i < this.contents.length; i++) {
+        for(int i = 0; i < this.contents.length - 1; i++) {
             newArray[i] = this.contents[i + 1];
         }
-        returnData = this.contents[this.contents.length - 1];
+        returnData = this.contents[0];
         this.contents = newArray;
 
         return returnData;
@@ -65,6 +75,6 @@ public class Queue<T> {
         if(this.contents.length == 0) {
             throw new IndexOutOfBoundsException();
         }
-        return this.contents[this.contents.length - 1];
+        return this.contents[0];
     }
 }

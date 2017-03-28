@@ -4,8 +4,21 @@ import java.util.Scanner;
 
 public class GSOCExercise {
     public static void main(String[] args) {
-        runningMedian();
+        Scanner scan = new Scanner(System.in);
+        char choice;
 
+        System.out.println("Press 1 for Queue, 2 for Running Median");
+
+        do {
+            choice = scan.next().charAt(0);
+            if(choice == '1') {
+                queueInput();
+            } else if(choice == '2') {
+                runningMedian();
+            } else {
+                System.out.println("Invalid input");
+            }
+        } while(choice != '1' || choice != '2');
     }
 
     /**
@@ -32,7 +45,11 @@ public class GSOCExercise {
             if(vals.length == 2) {
                 queue.put(Integer.parseInt(vals[1]));
             } else {
-                System.out.println(queue.pop());
+                if(vals[0].equals("3")) {
+                    System.out.println(queue.peek());
+                } else {
+                    queue.pop();
+                }
             }
         }
     }
@@ -63,10 +80,10 @@ public class GSOCExercise {
             * Prints the "running median" of the data set
             */
             if(data.length % 2 == 0) {
-                System.out.println((data[data.length / 2]
+                System.out.printf("%.2f\n", (data[data.length / 2]
                                  + data[(data.length / 2) - 1])/2f);
             } else {
-                System.out.println((float)data[(data.length / 2)]);
+                System.out.printf("%.2f\n", (float)data[(data.length / 2)]);
             }
         }
 
